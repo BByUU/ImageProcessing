@@ -17,9 +17,3 @@ def Binarization(img):
     out[out < th] = 0
     out[out >= th] = 255
     return out
-
-# # Save result
-# cv2.imwrite("out.jpg", out)
-# cv2.imshow("result", out)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()

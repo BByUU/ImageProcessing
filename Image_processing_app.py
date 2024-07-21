@@ -17,6 +17,9 @@ root.title("Image Processor")
 original_image = None
 processed_image = None
 
+# 存儲函數的全局字典
+function_dict = {}
+
 # 上傳圖片函數
 def upload_image():
     global original_image, processed_image
@@ -78,15 +81,26 @@ def load_function(function_name):
         return getattr(module, function_name)
     return None
 
+# 初始化加載所有函數
+def initialize_functions():
+    global function_dict
+    function_names = get_function_names()
+    for name in function_names:
+        func = load_function(name)
+        if func and callable(func):
+            function_dict[name] = func
+        else:
+            print(f"Function {name} is not callable or not found.")
+
 # 創建處理圖片的函數
 def apply_effect(n):
     global original_image, processed_image
     if original_image:
-        function_names = get_function_names()
+        function_names = list(function_dict.keys())
         if 0 <= n < len(function_names):
             function_name = function_names[n]
-            func = load_function(function_name)
-            if func and callable(func):
+            func = function_dict[function_name]
+            if func:
                 # 將 PIL 圖像轉換為 NumPy 數組
                 original_np = np.array(original_image)
                 # 調用處理函數
@@ -116,7 +130,8 @@ processed_label.grid(row=0, column=1, padx=10, pady=10)
 # 創建效果按鈕
 buttons_frame = tk.Frame(root)
 buttons_frame.pack()
-button_names = get_function_names()
+initialize_functions()
+button_names = list(function_dict.keys())
 if button_names:
     for i in range(len(button_names)):
         button = tk.Button(buttons_frame, text=button_names[i], command=lambda i=i: apply_effect(i))
