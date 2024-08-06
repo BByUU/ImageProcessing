@@ -28,6 +28,6 @@ import cv2
 #     cv2.waitKey(0)
 #     cv2.destroyAllWindows()
 
-def Channel_Swapping(img):
+def Q1_Channel_Swapping(img):
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     return img
