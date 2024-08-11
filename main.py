@@ -6,9 +6,6 @@ import numpy as np
 import importlib.util
 import os
 
-# 打印當前工作目錄
-print("Current working directory:", os.getcwd())
-
 # 創建主窗口
 root = tk.Tk()
 root.title("Image Processor")
@@ -23,7 +20,21 @@ function_dict = {}
 # 上傳圖片函數
 def upload_image():
     global original_image, processed_image
-    file_path = filedialog.askopenfilename()
+    # 定義允許的檔案類型
+    filetypes = [        
+        ('image files', '*.png;*.jpg;*.jpeg'),  # 允許的圖片類型
+        ('All files', '*.*')             # 允許所有檔案類型
+    ]
+    # 獲取當前腳本的目錄
+    current_directory = os.path.dirname(__file__)
+    
+    # 彈出檔案選擇對話框，並指定允許的檔案類型
+    file_path = filedialog.askopenfilename(
+        title='Open a file',
+        initialdir=current_directory,  # 設置初始目錄為程式碼所在資料夾
+        filetypes=filetypes
+    )
+
     if file_path:
         original_image = Image.open(file_path)
         processed_image = original_image.copy()
