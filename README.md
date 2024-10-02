@@ -28,3 +28,8 @@
   - 程式碼：Q5_HSV_Conversion.py
   - 說明：將RGB三通道的影像轉換成HSV色彩空間的影像，反轉H色相(+180)後轉回RGB以顯示影像。
 - 第六題：Discretization of Color
+  - 程式碼：Q6_Discretization_of_Color.py
+  - 說明：將RGB三通道的影像轉換成8種顏色的影像。
+- 第七題：Average Pooling
+  - 程式碼：Q7_Average_Pooling.py
+  - 說明：平均池化是一種影像處理技術，它會將影像的大小縮小，並取出影像中某一區域的平均值，以降低影像的分辨率。

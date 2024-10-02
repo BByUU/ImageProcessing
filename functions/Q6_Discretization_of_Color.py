@@ -17,5 +17,9 @@ def Q6_Discretization_of_Color(img):
     
     # 應用 np.select 來根據條件分配值
     categorized_image = np.select(conditions, values)
+    
+    # OpenCV的'imshow'接收的圖像數據類型是 uint8，並且像素值範圍在 [0, 255]
+    # 轉換為 uint8 並回傳
+    categorized_image = categorized_image.astype(np.uint8)
     return categorized_image
     
